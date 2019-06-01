@@ -82,7 +82,7 @@ bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
 # long focus
-bindsym $mod+Shift+a $FOCUS_ROOT
+bindsym $mod+a $FOCUS_ROOT
 bindsym $ctrl+$mod+$left $FOCUS_ROOT; focus left;
 bindsym $ctrl+$mod+$right $FOCUS_ROOT; focus right;
 
@@ -117,8 +117,9 @@ bindsym $mod+Shift+w layout tabbed
 #bindsym $mod+Shift+e layout toggle split
 
 # focus the parent/child container
-#bindsym $mod+Shift+a focus parent
-#bindsym $mod+Shift+d focus child
+bindsym $mod+Shift+a focus parent
+bindsym $mod+Shift+d focus child
+
 
 # toggle floating
 bindsym $mod+x floating toggle
