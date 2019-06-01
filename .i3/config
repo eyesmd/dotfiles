@@ -66,72 +66,65 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # default layout
 workspace_layout tabbed
 
-# new split container
-bindsym $mod+h split h
-bindsym $mod+v split v
+# split container
+bindsym $mod+s split toggle
+bindsym $mod+h split horizontal
+bindsym $mod+v split vertical
 
 # fullscreen
 bindsym $mod+z fullscreen toggle
 
-# change focus
+
+# short focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# move focused window
+# long focus
+bindsym $mod+Shift+a $FOCUS_ROOT
+bindsym $ctrl+$mod+$left $FOCUS_ROOT; focus left;
+bindsym $ctrl+$mod+$right $FOCUS_ROOT; focus right;
+
+# workspace focus
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+0 workspace 0
+
+# short move
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-# focus workspace child
-bindsym $ctrl+$mod+$left $FOCUS_ROOT; focus left;
-bindsym $ctrl+$mod+$right $FOCUS_ROOT; focus right;
-
-# move focused window to next workspace child
+# long move
 bindsym Shift+$ctrl+$mod+$left focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus left;
 bindsym Shift+$ctrl+$mod+$right focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus right;
 
-# switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
-# move focused container to workspace
+# workspace move
 bindsym $mod+Shift+1 move container to workspace 1; workspace 1
 bindsym $mod+Shift+2 move container to workspace 2; workspace 2
 bindsym $mod+Shift+3 move container to workspace 3; workspace 3
 bindsym $mod+Shift+4 move container to workspace 4; workspace 4
-bindsym $mod+Shift+5 move container to workspace 5; workspace 5
-bindsym $mod+Shift+6 move container to workspace 6; workspace 6
-bindsym $mod+Shift+7 move container to workspace 7; workspace 7
-bindsym $mod+Shift+8 move container to workspace 8; workspace 8
-bindsym $mod+Shift+9 move container to workspace 9; workspace 9
-bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+bindsym $mod+Shift+0 move container to workspace 10; workspace 0
 
 
 # change container layout
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+#bindsym $mod+Shift+e layout toggle split
 
 # focus the parent/child container
-bindsym $mod+a focus parent
-bindsym $mod+d focus child
+#bindsym $mod+Shift+a focus parent
+#bindsym $mod+Shift+d focus child
 
 # toggle floating
 bindsym $mod+x floating toggle
 
 # drag floating windows
-floating_modifier $mod
+#floating_modifier $mod
 
 # change focus between tiling / floating windows
 bindsym $mod+m focus mode_toggle
