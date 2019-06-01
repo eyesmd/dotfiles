@@ -30,6 +30,12 @@ for_window [class="^.*"] border pixel 1
 workspace_auto_back_and_forth yes
 
 
+# ------
+# MACROS
+# ------
+
+set $FOCUS_ROOT focus parent; focus parent; focus parent; focus parent; focus child; focus child
+
 # -------------
 # CORE BINDINGS 
 # -------------
@@ -79,13 +85,9 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-# If at the top level I have several tabs, and in the focused one, I'm nested in several splits, with 'focus right'
-# I need to move through the splits before I can get to the next tab.
-# What I propose to bypass is new bindings which focus the workspace and then focus left-right.
-
 # focus workspace child
-bindsym $ctrl+$mod+$left focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus left;
-bindsym $ctrl+$mod+$right focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus right;
+bindsym $ctrl+$mod+$left $FOCUS_ROOT; focus left;
+bindsym $ctrl+$mod+$right $FOCUS_ROOT; focus right;
 
 # move focused window to next workspace child
 bindsym Shift+$ctrl+$mod+$left focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus left;
