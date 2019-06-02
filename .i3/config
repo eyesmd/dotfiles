@@ -21,13 +21,18 @@ set $right Right
 # ------
 
 # font for window titles and ibar
+# TODO: to try out
+# https://github.com/jenskutilek/FiraSystemFontReplacement
 font pango:monospace 8
 
-# disable title bar (deprecated way)
-for_window [class="^.*"] border pixel 1
+# border setting
+default_border pixel
 
-# move to previous workspace when moving to the current workspace
-workspace_auto_back_and_forth yes
+# disable focus wrap-around
+focus_wrapping no
+
+# drag floating windows
+floating_modifier $mod
 
 
 # ------
@@ -35,6 +40,7 @@ workspace_auto_back_and_forth yes
 # ------
 
 set $FOCUS_ROOT focus parent; focus parent; focus parent; focus parent; focus child; focus child
+
 
 # -------------
 # CORE BINDINGS 
@@ -74,6 +80,14 @@ bindsym $mod+v split vertical
 # fullscreen
 bindsym $mod+z fullscreen toggle
 
+# toggle floating
+bindsym $mod+x floating toggle
+
+# scratchpad
+# TODO: Rework. I should take advantage of the fact that 'scratchpad show' hides current scratchpad window. So 'move scratchpad' is a rarer shortcut, so to speak.
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+
 
 # short focus
 bindsym $mod+$left focus left
@@ -82,6 +96,7 @@ bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
 # long focus
+# TODO: Could change to $mod+tab, I have to feel it out
 bindsym $mod+a $FOCUS_ROOT
 bindsym $ctrl+$mod+$left $FOCUS_ROOT; focus left;
 bindsym $ctrl+$mod+$right $FOCUS_ROOT; focus right;
@@ -91,7 +106,7 @@ bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
-bindsym $mod+0 workspace 0
+bindsym $mod+0 workspace 10
 
 # short move
 bindsym $mod+Shift+$left move left
@@ -100,15 +115,15 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # long move
-bindsym Shift+$ctrl+$mod+$left focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus left;
-bindsym Shift+$ctrl+$mod+$right focus parent; focus parent; focus parent; focus parent; focus child; focus child; focus right;
+bindsym Shift+$ctrl+$mod+$left $FOCUS_ROOT; move left
+bindsym Shift+$ctrl+$mod+$right $FOCUS_ROOT; move right
 
 # workspace move
 bindsym $mod+Shift+1 move container to workspace 1; workspace 1
 bindsym $mod+Shift+2 move container to workspace 2; workspace 2
 bindsym $mod+Shift+3 move container to workspace 3; workspace 3
 bindsym $mod+Shift+4 move container to workspace 4; workspace 4
-bindsym $mod+Shift+0 move container to workspace 10; workspace 0
+bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 
 
 # change container layout
@@ -117,18 +132,9 @@ bindsym $mod+Shift+w layout tabbed
 #bindsym $mod+Shift+e layout toggle split
 
 # focus the parent/child container
-bindsym $mod+Shift+a focus parent
-bindsym $mod+Shift+d focus child
+bindsym Shift+$mod+a focus parent
+bindsym Shift+$mod+d focus child
 
-
-# toggle floating
-bindsym $mod+x floating toggle
-
-# drag floating windows
-#floating_modifier $mod
-
-# change focus between tiling / floating windows
-bindsym $mod+m focus mode_toggle
 
 
 # ---------
@@ -138,6 +144,15 @@ bindsym $mod+m focus mode_toggle
 # firefox
 bindsym $mod+f exec firefox
 
+# spotify
+set $SPOTIFY_CONTROL $HOME/.bin/spotify_control
+bindsym XF86AudioPlay exec $SPOTIFY_CONTROL playpause
+bindsym XF86AudioNext exec $SPOTIFY_CONTROL next
+bindsym XF86AudioPrev exec $SPOTIFY_CONTROL previous
+# bindsym XF86AudioPlay exec $HOME/.bin/spotify-control play
+# bindsym XF86AudioPause exec $HOME/.bin/spotify-control pause
+# bindsym XF86AudioNext exec $HOME/.bin/spotify-control next
+# bindsym XF86AudioPrev exec $HOME/.bin/spotify-control previous
 
 # -------
 # PATCHES
@@ -149,10 +164,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 bindsym XF86MonBrightnessUp exec light -A 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+#bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioPause exec playerctl play-pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
 
 
 # -------
@@ -169,7 +184,9 @@ bar {
 }
 
 # background
-exec_always feh --bg-fill /home/dreyes/downloads/Pictures/cat.png
-#exec_always feh --bg-fill /home/dreyes/downloads/Pictures/white_hair_coffee.png
-#exec_always feh --bg-fill /home/dreyes/downloads/Pictures/train.jpg
+set $BG_ROOT_DIR $HOME/downloads/Pictures
+
+exec_always feh --bg-fill $BG_ROOT_DIR/cat.png
+#exec_always feh --bg-fill $BG_ROOT_DIR/white_hair_coffee.png
+#exec_always feh --bg-fill $BG_ROOT_DIR/train.jpg
 
