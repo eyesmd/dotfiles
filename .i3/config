@@ -21,8 +21,6 @@ set $right Right
 # ------
 
 # font for window titles and ibar
-# TODO: to try out
-# https://github.com/jenskutilek/FiraSystemFontReplacement
 font pango:monospace 8
 
 # border setting
@@ -177,16 +175,16 @@ bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
 # start compton
 exec compton
 
+# start megasync
+exec megasync
+
 # start i3bar
 bar {
        status_command i3status --config $HOME/.dotfiles/.i3/i3status.config
        tray_output primary
 }
 
-# background
+# background image
 set $BG_ROOT_DIR $HOME/downloads/Pictures
-
 exec_always feh --bg-fill $BG_ROOT_DIR/cat.png
-#exec_always feh --bg-fill $BG_ROOT_DIR/white_hair_coffee.png
-#exec_always feh --bg-fill $BG_ROOT_DIR/train.jpg
 
