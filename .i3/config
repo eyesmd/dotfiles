@@ -139,18 +139,19 @@ bindsym Shift+$mod+d focus child
 # GRAPHICS
 # ---------
 
+set $DISPLAY_ROOT $HOME/.bin/display
+
 # mode for operations over displays
 bindsym $mod+o mode graphics
 mode graphics {
-    bindsym c exec "$HOME/.bin/configure-displays"; mode default
-
+    bindsym c exec "$DISPLAY_ROOT/smooth_xrandr.sh $DISPLAY_ROOT/args-auto-configure.sh"; mode default
     bindsym Escape mode default
     bindsym Return mode default
 }
 
 
 # shortcut to auto-configure displays
-bindsym $mod+e exec "$HOME/.bin/configure-displays";
+bindsym $mod+e exec "$DISPLAY_ROOT/smooth_xrandr.sh $DISPLAY_ROOT/args-auto-configure.sh"; mode default
 
 
 # ---------
@@ -160,16 +161,12 @@ bindsym $mod+e exec "$HOME/.bin/configure-displays";
 # firefox
 bindsym $mod+f exec firefox
 
-
 # spotify
 set $SPOTIFY_CONTROL $HOME/.bin/spotify_control
 bindsym XF86AudioPlay exec $SPOTIFY_CONTROL playpause
 bindsym XF86AudioNext exec $SPOTIFY_CONTROL next
 bindsym XF86AudioPrev exec $SPOTIFY_CONTROL previous
-# bindsym XF86AudioPlay exec $HOME/.bin/spotify-control play
-# bindsym XF86AudioPause exec $HOME/.bin/spotify-control pause
-# bindsym XF86AudioNext exec $HOME/.bin/spotify-control next
-# bindsym XF86AudioPrev exec $HOME/.bin/spotify-control previous
+
 
 # -------
 # PATCHES
