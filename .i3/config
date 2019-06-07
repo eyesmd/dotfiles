@@ -54,13 +54,13 @@ bindsym $mod+space exec dmenu_run
 bindsym $mod+q kill
 
 # reload i3
-bindsym $mod+Shift+c restart
+bindsym $mod+Shift+c reload
 
-# restart i3 (violent reload)
-bindsym $mod+Shift+r restart
+# restart i3 (note: breaks compton)
+bindsym $mod+Shift+r exec "i3-nagbar -t warning -m 'Do you really want to restart i3?' -b 'Yes, restart i3' 'i3-msg restart'"
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
 # -----------------
@@ -104,6 +104,7 @@ bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
 bindsym $mod+0 workspace 10
 
 # short move
@@ -121,8 +122,8 @@ bindsym $mod+Shift+1 move container to workspace 1; workspace 1
 bindsym $mod+Shift+2 move container to workspace 2; workspace 2
 bindsym $mod+Shift+3 move container to workspace 3; workspace 3
 bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
 bindsym $mod+Shift+0 move container to workspace 10; workspace 10
-
 
 # change container layout
 bindsym $mod+Shift+s layout stacking
@@ -134,6 +135,23 @@ bindsym Shift+$mod+a focus parent
 bindsym Shift+$mod+d focus child
 
 
+# ---------
+# GRAPHICS
+# ---------
+
+# mode for operations over displays
+bindsym $mod+o mode graphics
+mode graphics {
+    bindsym c exec "$HOME/.bin/configure-displays"; mode default
+
+    bindsym Escape mode default
+    bindsym Return mode default
+}
+
+
+# shortcut to auto-configure displays
+bindsym $mod+e exec "$HOME/.bin/configure-displays";
+
 
 # ---------
 # SHORTCUTS
@@ -141,6 +159,7 @@ bindsym Shift+$mod+d focus child
 
 # firefox
 bindsym $mod+f exec firefox
+
 
 # spotify
 set $SPOTIFY_CONTROL $HOME/.bin/spotify_control
@@ -185,6 +204,5 @@ bar {
 }
 
 # background image
-set $BG_ROOT_DIR $HOME/downloads/Pictures
-exec_always feh --bg-fill $BG_ROOT_DIR/cat.png
+exec_always feh --bg-fill $HOME/.dotfiles/.background-image
 

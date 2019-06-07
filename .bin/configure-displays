@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# TODO:
+# I'd rather not keep writing in bash, but I might want to refactor
+# it a little bit.
+
+# This script...
+# 1. Queries xrandr and picks the correct display configuration
+# (I recommend generating the xrandr commands with the arandr gui)
+# 2. Applies the configuration and dims the background (to hide
+#    imperfections caused by xrandr messing around with the screen,
+#    yeah, i know, whatever, it works)
+# 3. Restores the brightness once enough time went by
+
+isConnected() {
+    xrandr | grep -q "$1 connected"
+}
+
+main_xrandr_args=""
+if isConnected HDMI-1
+then
+    # Dual setting
+    main_xrandr_args="--output DP-1 --off --output HDMI-1 --mode 1600x900 --pos 0x0 --rotate normal --output eDP-1 --primary --mode 1366x768 --pos 128x900 --rotate normal --output HDMI-2 --off"
+else
+    # Single setting
+    main_xrandr_args="--output DP-1 --off --output HDMI-1 --off --output eDP-1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output HDMI-2 --off"
+fi
+
+DISPLAYS=(eDP-1 HDMI-1)
+
+massiveChangeBrightness() {
+    if [ "$#" != 1 ]
+    then
+        echo "Called massiveChangeBrightness without any arguments. Stopping." >&2
+        exit 1
+    fi
+
+    massive_brightness_xrandr_args=""
+    for display in "${DISPLAYS[@]}"
+    do
+        if isConnected $display 
+        then
+            massive_brightness_xrandr_args+="--output $display --brightness $1 "
+        fi
+    done
+}
+
+
+massiveChangeBrightness 0.0
+xrandr $main_xrandr_args $massive_brightness_xrandr_args
+sleep 1.0
+feh --bg-fill $HOME/.dotfiles/.background-image
+massiveChangeBrightness 1.0
+xrandr $main_xrandr_args $massive_brightness_xrandr_args
+
