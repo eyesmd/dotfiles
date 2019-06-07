@@ -193,6 +193,9 @@ bindsym XF86MonBrightnessDown exec light -U 1 # decrease screen brightness
 # WAKE UP
 # -------
 
+# natural scrolling
+exec --no-startup-id synclient HorizEdgeScroll=1 VertEdgeScroll=1 VertScrollDelta=-111
+
 # start compton
 exec compton
 
