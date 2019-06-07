@@ -78,14 +78,15 @@ bindsym $mod+v split vertical
 # fullscreen
 bindsym $mod+z fullscreen toggle
 
-# toggle floating
-bindsym $mod+x floating toggle
-
 # scratchpad
-# TODO: Rework. I should take advantage of the fact that 'scratchpad show' hides current scratchpad window. So 'move scratchpad' is a rarer shortcut, so to speak.
-bindsym $mod+minus move scratchpad
+#  all windows are sticky
+for_window [class=".*"] sticky enable
+#  cut to scratchpad
+bindsym $mod+x move scratchpad; scratchpad show
+#  scroll through scratchpad
 bindsym $mod+plus scratchpad show
-
+#  paste as tiling
+bindsym $mod+p [floating] floating toggle
 
 # short focus
 bindsym $mod+$left focus left
@@ -95,6 +96,7 @@ bindsym $mod+$right focus right
 
 # long focus
 # TODO: Could change to $mod+tab, I have to feel it out
+# TODO: Could also change to up+down if I use stacks
 bindsym $mod+a $FOCUS_ROOT
 bindsym $ctrl+$mod+$left $FOCUS_ROOT; focus left;
 bindsym $ctrl+$mod+$right $FOCUS_ROOT; focus right;
@@ -160,6 +162,9 @@ bindsym $mod+e exec "$DISPLAY_ROOT/smooth_xrandr.sh $DISPLAY_ROOT/args-auto-conf
 
 # firefox
 bindsym $mod+f exec firefox
+
+# dolphin
+bindsym $mod+d exec dolphin
 
 # spotify
 set $SPOTIFY_CONTROL $HOME/.bin/spotify_control
