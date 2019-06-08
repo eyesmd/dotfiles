@@ -166,6 +166,9 @@ bindsym $mod+f exec firefox
 # dolphin
 bindsym $mod+d exec dolphin
 
+# replace window
+#bindsym $mod+y mark to_disappear; exec "i3-msg 'exec i3-sensible-terminal' && sleep 0.25 && i3-msg swap container with mark to_disappear && i3-msg [con_mark='to_disappear'] kill"
+
 # spotify
 set $SPOTIFY_CONTROL $HOME/.bin/spotify_control
 bindsym XF86AudioPlay exec $SPOTIFY_CONTROL playpause
