@@ -45,6 +45,7 @@ libreadline-dev
 python-setuptools
 
 rar
+jq
 imagemagick
 xclip
 xbindkeys

@@ -48,7 +48,7 @@ set $FOCUS_ROOT focus parent; focus parent; focus parent; focus parent; focus ch
 bindsym $mod+Return exec i3-sensible-terminal
 
 # open program launcher
-bindsym $mod+space exec rofi -show run -bg "#222222" -fg "#cccccc" -separator-style "none" -hide-scrollbar -tokenize -lines 10 -font "Hack Regular 13" -line-margin 5
+bindsym $mod+space exec rofi -show run -columns 1 -padding 10 -width 50 -lines 5 -bg "#222222" -fg "#cccccc" -separator-style "none" -hide-scrollbar -tokenize -font "Hack Regular 13" -line-margin 5
 
 # kill focused window
 bindsym $mod+q kill
