@@ -62,6 +62,10 @@ bindsym $mod+Shift+r exec "i3-nagbar -t warning -m 'Do you really want to restar
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# screenshots
+bindsym --release Print exec "import $HOME/$(date '+screenshot_%Y-%m-%d_%H-%M-%S.png')"
+bindsym --release Shift+Print exec "import -window root $HOME/$(date '+screenshot_%Y-%m-%d_%H-%M-%S.png')"
+
 
 # -----------------
 # WINDOW MANAGEMENT
@@ -79,8 +83,6 @@ bindsym $mod+v split vertical
 bindsym $mod+z fullscreen toggle
 
 # scratchpad
-#  all windows are sticky
-for_window [class=".*"] sticky enable
 #  cut to scratchpad
 bindsym $mod+x move scratchpad; scratchpad show
 #  scroll through scratchpad
